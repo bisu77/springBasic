@@ -1,0 +1,24 @@
+package hello.core;
+
+import hello.core.member.Grade;
+import hello.core.member.Member;
+import hello.core.member.MemberService;
+import hello.core.member.MemberServiceImpl;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class MemberApplicationTest {
+    MemberService memberService = new MemberServiceImpl();
+
+    @Test
+    void join(){
+        Member member = new Member(1L, "hello", Grade.VIP);
+
+        memberService.join(member);
+        Member findMember = memberService.findMember(member.getId());
+
+        Assertions.assertThat(member).isEqualTo(findMember);
+    }
+}
