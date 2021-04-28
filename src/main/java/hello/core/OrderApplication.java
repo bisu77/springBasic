@@ -5,13 +5,16 @@ import hello.core.member.Member;
 import hello.core.member.MemberService;
 import hello.core.order.Order;
 import hello.core.order.OrderService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class OrderApplication {
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        MemberService memberService = appConfig.memberService();
-        OrderService orderService = appConfig.orderService();
+        //반환타입이 1개일 경우 타입으로도 getBean 가능
+        MemberService memberService = ac.getBean(MemberService.class);
+        OrderService orderService = ac.getBean(OrderService.class);
 
         Member member = new Member(1L, "memberA", Grade.VIP);
         memberService.join(member);
