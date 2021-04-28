@@ -10,10 +10,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemberApplicationTest {
-    MemberService memberService = new MemberServiceImpl();
+    MemberService memberService;
 
     @Test
     void join(){
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+
         Member member = new Member(1L, "hello", Grade.VIP);
 
         memberService.join(member);
